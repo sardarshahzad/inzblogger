@@ -3,6 +3,7 @@ using blogger.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 
 namespace inzblogger.webui.Controllers
 {
@@ -98,18 +99,33 @@ namespace inzblogger.webui.Controllers
             int maxContentLength = 1024 * 1024 * 10; // 10 Mb
             if(PostImage != null && PostImage.Length>0)
             {
-                extension PostImage.FileName.Substring(PostImage.FileName.LastIndexOf('.')).ToLower(); if (PostImage.Length > maxContentLength)
+                extension=PostImage.FileName.Substring(PostImage.FileName.LastIndexOf('.')).ToLower(); if (PostImage.Length > maxContentLength)
 
-                    ViewBag Error "File size must be less than 10MB";
+                    ViewBag.Error = "File size must be less than 10MB";
 
-else if (ALLowedFileExtensions.Contains(extension))
-
+                else if (AllowedFileExtensions.Contains(extension))
+                {
                     ViewBag.Error = "Please Upload image of type .jpg, jpeg,.png";
-
+                }
                 else
                 {
+                    string relativeImagePath = $"/images/posts/(post.Id)-(Path.GetFileNameWithoutExtension (PostImage.FileName))-(DateTime.UtcNow. Ticks).jpg";
+                    string absoluteImagePath = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot(relativeImagePath)");
 
+                    using (var stream = new FileStream(absoluteImagePath, FileMode.Create))
+                    {
+
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            PostImage.CopyTo(memoryStream);
+                            using (var img =Image.FromStream(memoryStream)) 
+                            {
+
+                            }
+                        }
+                    }
                 }
+
             }
 
             return View();
