@@ -87,7 +87,7 @@ namespace inzblogger.webui.Controllers
             return View(new Post());
         }
         [HttpPost]
-        public IActionResult CreatePost(Post post,IFormFile PostImage: )
+        public IActionResult CreatePost(Post post,IFormFile PostImage)
         {
             string imagePath = "";
 
@@ -96,6 +96,21 @@ namespace inzblogger.webui.Controllers
             IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".jpeg", ".png" };
 
             int maxContentLength = 1024 * 1024 * 10; // 10 Mb
+            if(PostImage != null && PostImage.Length>0)
+            {
+                extension PostImage.FileName.Substring(PostImage.FileName.LastIndexOf('.')).ToLower(); if (PostImage.Length > maxContentLength)
+
+                    ViewBag Error "File size must be less than 10MB";
+
+else if (ALLowedFileExtensions.Contains(extension))
+
+                    ViewBag.Error = "Please Upload image of type .jpg, jpeg,.png";
+
+                else
+                {
+
+                }
+            }
 
             return View();
         }
