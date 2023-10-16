@@ -1,0 +1,49 @@
+﻿@model IEnumerable<blogger.Models.Post>;
+@{
+    ViewData["Title"] = "Posts";
+}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto border border-success border-5">
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th colspan="6">
+                            <div class="text-center">
+                                <a class="btn btn-success link-light display-6 text-decoration-none align-self-center" asp-controller="Post"asp-action="CreatePost">Create New Post</a>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">Sr#</th>
+                        <th class="text-center">Title Of Post</th>
+                        <th class="text-center">Short Description</th>
+                        <th class="text-center">Category</th>
+                        <th class="text-center">Post Status</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                        foreach(var item in Model)
+                        {
+                           <tr>
+                            <td class="fs-6 text-center">@Convert.ToInt32(++i)</td>
+                            <td class="fs-6 text-center">@item.Title</td>
+                            <td class="fs-6 text-center">@item.ShortDescription</td>
+                            <td class="fs-6 text-center">@item.Category.Name</td>
+                            <td class="fs-6 text-center">@item.PostStatus.Name</td>
+                            <td class="fs-6 text-center w-25">
+                                    <a class="btn-sm btn-success text-decoration-none" asp-controller="Post" asp-action="UpdatePost" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn-sm btn-success text-decoration-none" asp-controller="Post" asp-action="DetailsPost" asp-route-id="@item.Id">Details</a>
+                                    <a class="btn-sm btn-success text-decoration-none" asp-controller="Post" asp-action="DeletePost" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                           </tr> 
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

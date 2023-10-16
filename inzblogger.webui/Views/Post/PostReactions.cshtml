@@ -1,0 +1,64 @@
+﻿@model IEnumerable<blogger.Models.PostReaction>;
+@{
+    ViewData["Title"] = "PostReactions";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto border border-success border-5">
+
+            <table class="table table-bordered mt-3">
+
+                <thead>
+
+                    <tr>
+                        <th colspan="6"><h1 class="text-success display-1 text-center">Post Reactions</h1></th>
+                    </tr>
+                    <tr>
+
+                        <th colspan="6">
+                            <div class="text-center">
+                                <a class="btn btn-success link-light display-6 text-decoration-none align-self-center" asp-controller="Post" asp-action="CreatePostReaction">Create New PostReaction</a>
+                            </div>
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th class="text-center">Sr#</th>
+                        <th class="text-center">Post Title</th>
+                        <th class="text-center">Reaction for Post</th>
+                        <th class="text-center">Reaction By</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int i = 0;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="fs-6 text-center">@Convert.ToInt32(++i)</td>
+                                <td class="fs-6 text-center">@item.Post.Title</td>
+                                <td class="fs-6 text-center">@item.ReactionType.Name</td>
+                                <td class="fs-6 text-center">@item.User.Name</td>
+                                <td class="fs-6 text-center w-25">
+                                    <a class="btn-sm btn-success text-decoration-none" asp-controller="Post" asp-action="UpdatePostReaction" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn-sm btn-success text-decoration-none" asp-controller="Post" asp-action="DeletePostReaction" asp-route-id="@item.Id">Delete</a>
+                                </td>
+
+
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+    </div>
+</div>

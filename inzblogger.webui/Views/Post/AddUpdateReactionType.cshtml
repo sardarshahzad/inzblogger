@@ -1,0 +1,23 @@
+﻿@model blogger.Models.ReactionType;
+@{
+    ViewData["Title"] = "ReactionTypes";
+}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-4 mx-auto border border-success border-5">
+            <h3 class="text-success text-center">AddUpdate Reaction Types</h3>
+
+            <form asp-action="AddUpdateReactionType">
+
+                <div class="">
+
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" type="text" class="form-control" />
+
+                </div>
+
+                <button type="submit" class="btn btn-success">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿@using blogger.Models;
+@using blogger.Data;
+@inject inzBloggerContext db;
+@{
+    string accessToken = Context.Request.Cookies["user-access-token"];
+    User user = new User();
+    if(!string.IsNullOrEmpty(accessToken))
+    {
+        user = db.Users.Where(x => x.AccessToken.Equals(accessToken)).FirstOrDefault();
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - inzblogger.webui</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/inzblogger.webui.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">inzblogger.webui</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        @if (user.UserRoleId == 1)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId"
+                                   data-bs-toggle="dropdown" aria-expanded="false">Users</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownId">
+                                    <li><a class="dropdown-item" asp-area="" aspcontroller="User" asp-action="Users">Users</a></li>
+                                    <li><a class="dropdown-item" asp-area="" aspcontroller="User" asp-action="Roles">User Roles</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId"
+                                   data-bs-toggle="dropdown" aria-expanded="false">Posts</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownId">
+                                    <li><a class="dropdown-item" asp-area="" aspcontroller="Post" asp-action="Posts">Posts</a></li>
+                                    <li><a class="dropdown-item" asp-area="" aspcontroller="Post" asp-action="Categories">Post Categories</a></li>
+                                    <li><a class="dropdown-item" asp-area="" aspcontroller="Post" asp-action="PostStatuses">Post Statuses</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownId"
+                                   data-bs-toggle="dropdown" aria-expanded="false">Reactions</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownId">
+                                    <li><a class="dropdown-item" asp-area="" aspcontroller="Post" asp-action="ReactionTypes">Reaction Types</a></li>
+                                    <li><a class="dropdown-item" asp-area="" aspcontroller="Post" asp-action="PostReactions">Reactions on Posts</a></li>
+                                </ul>
+                            </li>
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" databs-toggle="dropdown" aria-expanded="false">Account</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownId">
+                        @if(user.UserRoleId==0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="logout">,Sardar
+                                    <span class="text-success">@user.Name</span> <span class="text-danger">logout</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - inzblogger.webui - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

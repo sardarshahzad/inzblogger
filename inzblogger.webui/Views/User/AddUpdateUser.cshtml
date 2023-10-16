@@ -1,0 +1,37 @@
+﻿@model blogger.Models.User;
+@{
+    ViewData["Title"] = "Users";
+}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-4 mx-auto border border-success border-5">
+            <h3 class="text-success text-center">AddUpdateRole</h3>
+            <form asp-action="AddUpdateUser">
+                <div class="">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" type="text" class=" form-control" />
+                </div>
+                <div class="">
+                    <label asp-for="EmailAdress" class="form-label"></label>
+                    <input asp-for="EmailAdress" type="text" class=" form-control" />
+                </div>
+                <div class="">
+                    <label asp-for="PhoneNumber" class="form-label"></label>
+                    <input asp-for="PhoneNumber" type="text" class=" form-control" />
+                </div>
+                <div class="">
+                    <label asp-for="IsConfirmed" class="form-label"></label>
+                    <input asp-for="IsConfirmed" type="text" class=" form-control" />
+                </div>
+                <div class="">
+                    <label asp-for="UserRoleId" class="form-label"></label>
+                    <input asp-for="UserRoleId" type="text" class=" form-control" />
+                </div>
+                <div class="d-grid col-lg-6 mx-auto my-5">
+                    <button type="submit" class="btn btn-success">Create or update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

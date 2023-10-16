@@ -1,0 +1,44 @@
+﻿@model IEnumerable<blogger.Models.Category>;
+@{
+    ViewData["Title"] = "Categories";
+}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto border border-success border-5">
+            <table class="table table-bordered mt-3 text-center">
+                <thead>
+                    <tr>
+                        <th colspan="3"><h1 class="text-success display-1 text-center mx-auto">Categories</h1></th>
+                    </tr>
+                <thead>
+                    <tr>
+                        <th colspan="3">
+                            <a class="btn btn-success text-decoration-none align-self-center text-center" asp-action="AddUpdateCategory">Create New</a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="text-center">Sr#</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@Convert.ToInt32(++i)</td>
+                                <td class="text-center">@item.Name</td>
+                                <td class="text-center">
+                                    <a class="btn btn-success text-decoration-none" asp-controller="Post" asp-action="AddUpdateCategory" asp-route-Id="@item.Id">Edit</a>
+                                    <a class="btn btn-success text-decoration-none" asp-controller="Post" asp-action="DeleteCategory" asp-route-Id="@item.Id">Delet</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

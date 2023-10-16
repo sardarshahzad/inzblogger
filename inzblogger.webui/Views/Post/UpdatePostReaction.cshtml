@@ -1,0 +1,31 @@
+﻿@model blogger.Models.PostReaction;
+@{
+    ViewData["Title"] = "UpdatePostReaction";
+}
+<h1 class="text-success text-center">Post Reaction</h1>
+<div class="Container">
+    <div class="row">
+        <div class="col-lg-4 mx-auto border border-success border-5">
+            <h3 class="text-success text-center">Update New Post Reaction</h3>
+
+            <div class="col-md-12">
+                <form asp-asp-controller="Post" asp-action="UpdatePostReaction">
+                    <div class="">
+                        <label asp-for="PostId" class="form-label"></label>
+                        <select asp-for="PostId" asp-items="@ViewBag.Posts" class="form-control"></select>
+                    </div>
+                    <div class="">
+                        <label asp-for="ReactionTypeId" class="form-label"></label>
+                        <select asp-for="ReactionTypeId" asp-items="@ViewBag.Reactions" class="form-control"></select>
+                    </div>
+                    <div class="">
+                        <input asp-for="UserId" type="hidden" class="form-control" />
+                    </div>
+                    <div class="d-grid col-lg-6 mx-auto my-3">
+                        <button type="submit" class="btn btn-success">Create Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

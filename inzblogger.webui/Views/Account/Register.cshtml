@@ -1,0 +1,38 @@
+﻿@model blogger.Models.User;
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 border-2 mx-auto">
+            <h3 class="border bg-dark text-white text-center">Register</h3>
+            <form asp-action="Register">
+                <div class="">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" type="text" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="">
+                    <label asp-for="EmailAdress" class="form-label"></label>
+                    <input asp-for="EmailAdress" type="email" class="form-control" />
+                    <span asp-validation-for="EmailAdress" class="text-danger"></span>
+                </div>
+                <div class="">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="">
+                    <label asp-for="PhoneNumber" class="form-label"></label>
+                    <input asp-for="PhoneNumber" type="text" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="d-grid col-lg-6 mx-auto my-3">
+                    <button type="submit" class="btn btn-success">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
